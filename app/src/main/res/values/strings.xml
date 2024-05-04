@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ProloBlockchain</string>
+    <string name="welcome_msg">Welcome User</string>
+
+    <!-- FOR SIGN IN PAGE / ACTIVITY -->
+
+    <string name="go_to_sign_in">Already Have and account? Sign In</string>
+
+    <!-- FOR SIGN UP PAGE / ACTIVITY -->
+
+
+    <string name="go_to_sign_up">Dont\'t Have and account? Sign Up</string>
+</resources>
