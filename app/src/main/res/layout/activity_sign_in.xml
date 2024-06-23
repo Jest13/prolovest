@@ -48,7 +48,8 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/edit_text_border"
             android:hint=" Email"
-            android:textColorHint="@color/gold" />
+            android:textColorHint="@color/gold"
+            android:textColor="@color/gold" />
 
         <EditText
             android:id="@+id/SignInPassword"
@@ -57,7 +58,8 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/edit_text_border"
             android:hint=" Password"
-            android:textColorHint="@color/gold" />
+            android:textColorHint="@color/gold"
+            android:textColor="@color/gold" />
     </LinearLayout>
 
     <TextView
