@@ -19,7 +19,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
 
-        //Hook Text View Objects:
+            //Hook Text View Objects:
         tv_first_name = findViewById(R.id.first_name);
         tv_last_name = findViewById(R.id.last_name);
         tv_email = findViewById(R.id.email);
