@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gold"
+    android:background="@drawable/top_background_main_activity"
     tools:context=".ProfileActivity">
 
 
@@ -66,6 +66,28 @@
             android:textSize="22sp"
             tools:layout_editor_absoluteX="126dp"
             tools:layout_editor_absoluteY="77dp" />
+
+        <TextView
+            android:id="@+id/textBalanceUSD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance in PROLO"
+            android:textColor="@color/gold"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="93dp"
+            tools:layout_editor_absoluteY="130dp" />
+
+        <TextView
+            android:id="@+id/balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7.775.890 P  "
+            android:textColor="@color/gold"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="170dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
