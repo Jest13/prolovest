@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         // Hook Sign out Button
-        sign_out_btn = findViewById(R.id.sign_out_btn);
+      //  sign_out_btn = findViewById(R.id.sign_out_btn);
 
         // Set On Click Listener:
         sign_out_btn.setOnClickListener(new View.OnClickListener() {

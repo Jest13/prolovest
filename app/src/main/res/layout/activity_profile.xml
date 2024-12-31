@@ -284,15 +284,6 @@
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/bottom_btn1" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -309,14 +300,6 @@
                         android:layout_weight="1"
                         app:srcCompat="@drawable/bottom_btn2" />
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -334,14 +317,7 @@
                         android:layout_weight="1"
                         app:srcCompat="@drawable/bottom_btn1" />
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textSize="12sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -357,15 +333,6 @@
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/bottom_btn3" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -382,14 +349,7 @@
                         android:layout_weight="1"
                         app:srcCompat="@drawable/bottom_btn4" />
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textSize="12sp" />
+
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>

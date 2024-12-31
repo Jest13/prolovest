@@ -78,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(SignUpActivity.this);
 
         // definition du point de controle api spring
-        String url = "http://192.168.1.175:8081/api/v1/user/register";
+        String url = "http://172.22.240.1:8081/api/v1/user/register";
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

@@ -58,7 +58,7 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         RequestQueue queue = Volley.newRequestQueue(SignInActivity.this);
-        String url = "http://192.168.1.175:8081/api/v1/user/login";
+        String url = "http://172.22.240.1:8081/api/v1/user/login";
 
         HashMap<String, String> params = new HashMap<>();
         params.put("email", et_email.getText().toString());
