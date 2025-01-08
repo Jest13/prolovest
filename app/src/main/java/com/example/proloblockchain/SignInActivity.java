@@ -2,6 +2,7 @@ package com.example.proloblockchain;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,24 +27,33 @@ import java.util.HashMap;
 
 public class SignInActivity extends AppCompatActivity {
 
-    Button sign_in_btn;
-    EditText et_email, et_password;
+    private Button sign_in_btn;
+    private EditText et_email, et_password;
+    private ProgressDialog progressDialog; // Ajout d'un indicateur de chargement
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        // Initialisation des vues
         et_email = findViewById(R.id.SignInemail);
         et_password = findViewById(R.id.SignInPassword);
         sign_in_btn = findViewById(R.id.login);
 
+        // Vérification des vues
         if (et_email == null || et_password == null || sign_in_btn == null) {
             Toast.makeText(this, "Error initializing views", Toast.LENGTH_LONG).show();
             Log.e("SignInActivity", "Initialization error: et_email, et_password or sign_in_btn is null");
             return;
         }
 
+        // Ajout de l'indicateur de chargement
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Logging in...");
+        progressDialog.setCancelable(false);
+
+        // Gestion du clic sur le bouton
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,54 +62,80 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    public void authenticateUser(){
-        if(!validateEmail() || !validatePassword()){
+    private void authenticateUser() {
+        if (!validateEmail() || !validatePassword()) {
             return;
         }
 
+        // Afficher l'indicateur de chargement
+        progressDialog.show();
+
         RequestQueue queue = Volley.newRequestQueue(SignInActivity.this);
-        String url = "http://172.22.240.1:8081/api/v1/user/login";
+        String url = "http://172.24.48.1:8081/api/v1/user/login";
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("email", et_email.getText().toString());
-        params.put("password", et_password.getText().toString());
+        params.put("email", et_email.getText().toString().trim());
+        params.put("password", et_password.getText().toString().trim());
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    String first_name = response.getString("first_name");
-                    String last_name = response.getString("last_name");
-                    String email = response.getString("email");
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss(); // Masquer l'indicateur de chargement
+                        handleLoginSuccess(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss(); // Masquer l'indicateur de chargement
+                        handleLoginError(error);
+                    }
+                });
 
-                    Intent goToProfile = new Intent(SignInActivity.this, ProfileActivity.class);
-                    goToProfile.putExtra("first_name", first_name);
-                    goToProfile.putExtra("last_namee", last_name);
-                    goToProfile.putExtra("email", email);
-                    startActivity(goToProfile);
-                    finish();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.e("SignInActivity", "JSON Exception: " + e.getMessage());
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Log.e("SignInActivity", "Volley Error: " + error.getMessage());
-                Toast.makeText(SignInActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // Set a retry policy in case of SocketTimeout & ConnectionTimeout Exceptions. Volley does retry for you if you have specified the policy.
+        // Configuration de la politique de réessai
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                10000, // timeout in milliseconds (10 seconds)
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, // number of retries
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)); // backoff multiplier
+                10000, // Timeout en millisecondes
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, // Nombre de tentatives
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT // Facteur de backoff
+        ));
 
         queue.add(jsonObjectRequest);
     }
+
+    private void handleLoginSuccess(JSONObject response) {
+        String first_name = response.optString("first_name", "N/A");
+        String last_name = response.optString("last_name", "N/A");
+        String email = response.optString("email", "N/A");
+
+        Intent goToProfile = new Intent(SignInActivity.this, ProfileActivity.class);
+        goToProfile.putExtra("first_name", first_name);
+        goToProfile.putExtra("last_name", last_name);
+        goToProfile.putExtra("email", email);
+        startActivity(goToProfile);
+        finish();
+    }
+
+
+    private void handleLoginError(VolleyError error) {
+        error.printStackTrace();
+        String errorMessage = "Login failed. Please try again.";
+
+        if (error.networkResponse != null) {
+            int statusCode = error.networkResponse.statusCode;
+            if (statusCode == 401) {
+                errorMessage = "Invalid credentials. Please check your email and password.";
+            } else if (statusCode >= 500) {
+                errorMessage = "Server error. Please try again later.";
+            }
+        } else if (error.getCause() instanceof java.net.UnknownHostException) {
+            errorMessage = "No internet connection. Please check your network.";
+        }
+
+        Log.e("SignInActivity", "Volley Error: " + error.getMessage());
+        Toast.makeText(SignInActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+    }
+
     public void goToHome(View view) {
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         startActivity(intent);
@@ -112,12 +148,12 @@ public class SignInActivity extends AppCompatActivity {
         finish();
     }
 
-    public boolean validateEmail(){
-        String email_e = et_email.getText().toString();
-        if (email_e.isEmpty()) {
+    private boolean validateEmail() {
+        String email = et_email.getText().toString().trim();
+        if (email.isEmpty()) {
             et_email.setError("Email cannot be empty!");
             return false;
-        } else if (!StringHelper.regexEmailValidationPattern(email_e)) {
+        } else if (!StringHelper.regexEmailValidationPattern(email)) {
             et_email.setError("Please enter a valid email");
             return false;
         } else {
@@ -126,9 +162,9 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
-    public boolean validatePassword(){
-        String password_p = et_password.getText().toString();
-        if (password_p.isEmpty()) {
+    private boolean validatePassword() {
+        String password = et_password.getText().toString().trim();
+        if (password.isEmpty()) {
             et_password.setError("Password cannot be empty!");
             return false;
         } else {
