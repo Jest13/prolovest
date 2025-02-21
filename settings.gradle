@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "ProloBlockchain"
-include ':app'
+include 'app'
