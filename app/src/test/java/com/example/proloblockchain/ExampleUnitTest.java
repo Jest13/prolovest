@@ -1,4 +1,4 @@
-package com.example.proloblockchain;
+package com.example.prolovest;
 
 import org.junit.Test;
 

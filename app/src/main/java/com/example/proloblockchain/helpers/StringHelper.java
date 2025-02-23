@@ -1,4 +1,4 @@
-package com.example.proloblockchain.helpers;
+package com.example.prolovest.helpers;
 
 public class StringHelper {
 
