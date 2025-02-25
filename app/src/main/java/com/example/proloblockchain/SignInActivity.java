@@ -1,7 +1,5 @@
 package com.example.prolovest;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,12 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.prolovest.ProfileActivity;
-import com.example.prolovest.R;
-import com.example.prolovest.SignUpActivity;
 import com.example.prolovest.helpers.StringHelper;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -113,7 +109,7 @@ public class SignInActivity extends AppCompatActivity {
         String last_name = response.optString("last_name", "N/A");
         String email = response.optString("email", "N/A");
 
-        Intent goToProfile = new Intent(SignInActivity.this, ProfileActivity.class);
+        Intent goToProfile = new Intent(SignInActivity.this, com.example.prolovest.ProfileActivity.class);
         goToProfile.putExtra("first_name", first_name);
         goToProfile.putExtra("last_name", last_name);
         goToProfile.putExtra("email", email);
@@ -142,7 +138,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void goToHome(View view) {
-        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+        Intent intent = new Intent(SignInActivity.this, com.example.prolovest.MainActivity.class);
         startActivity(intent);
         finish();
     }
