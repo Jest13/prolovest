@@ -18,6 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.prolovest.ProfileActivity;
+import com.example.prolovest.R;
+import com.example.prolovest.SignUpActivity;
 import com.example.prolovest.helpers.StringHelper;
 
 import org.json.JSONException;
@@ -71,7 +74,9 @@ public class SignInActivity extends AppCompatActivity {
         progressDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(SignInActivity.this);
-        String url = "http://172.24.48.1:8081/api/v1/user/login";
+        String url = "http://192.168.36.1:8081/api/v1/user/login"; // IP virtuelle pour emulateur virtuelle
+     //   String url = "http://10.188.222.200:8081/api/v1/user/login"; // IP WIFI pour pour emulateur physique
+
 
         HashMap<String, String> params = new HashMap<>();
         params.put("email", et_email.getText().toString().trim());

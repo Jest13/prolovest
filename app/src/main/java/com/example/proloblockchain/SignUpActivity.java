@@ -17,6 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.prolovest.MainActivity;
+import com.example.prolovest.SignInActivity;
 import com.example.prolovest.helpers.StringHelper;
 
 import java.util.HashMap;
@@ -78,7 +80,8 @@ public class SignUpActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(SignUpActivity.this);
 
         // definition du point de controle api spring
-        String url = "http://172.24.48.1:8081/api/v1/user/register";
+         String url = "http://192.168.36.1:8081/api/v1/user/register"; // IP virtuelle pour emulateur virtuelle
+       // String url = "http://10.188.222.200:8081/api/v1/user/register"; // IP WIFI pour pour emulateur physique
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

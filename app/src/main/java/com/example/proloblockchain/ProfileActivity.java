@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.prolovest.MainActivity;
+
 public class ProfileActivity extends AppCompatActivity {
 
     TextView tv_first_name, tv_last_name, tv_email;
