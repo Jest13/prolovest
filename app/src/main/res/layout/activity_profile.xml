@@ -20,8 +20,7 @@
             android:layout_width="97dp"
             android:layout_height="83dp"
             app:srcCompat="@drawable/prolovest_white"
-            tools:layout_editor_absoluteX="7dp"
-            tools:layout_editor_absoluteY="16dp" />
+            />
 
         <TextView
             android:id="@+id/first_name"
