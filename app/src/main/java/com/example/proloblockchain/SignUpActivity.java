@@ -80,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(SignUpActivity.this);
 
         // definition du point de controle api spring
-         String url = "http://192.168.1.82:8081/api/v1/user/register"; // IP virtuelle pour emulateur virtuelle
+         String url = "http://192.168.1.82:8080/api/v1/user/register"; // IP virtuelle pour emulateur virtuelle
        // String url = "http://10.188.222.200:8081/api/v1/user/register"; // IP WIFI pour pour emulateur physique
 
 

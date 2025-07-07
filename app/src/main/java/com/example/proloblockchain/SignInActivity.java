@@ -70,7 +70,7 @@ public class SignInActivity extends AppCompatActivity {
         progressDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(SignInActivity.this);
-        String url = "http://192.168.1.82:8081/api/v1/user/login"; // IP virtuelle pour emulateur virtuelle
+        String url = "http://192.168.1.82:8080/api/v1/user/login"; // IP virtuelle pour emulateur virtuelle
      //   String url = "http://10.188.222.200:8081/api/v1/user/login"; // IP WIFI pour pour emulateur physique
 
 
@@ -144,7 +144,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void goToSigUpAct(View view) {
-        Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+        Intent intent = new Intent(SignInActivity.this, com.example.prolovest.SignUpActivity.class);
         startActivity(intent);
         finish();
     }
