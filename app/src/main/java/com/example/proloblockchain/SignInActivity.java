@@ -1,4 +1,4 @@
-package com.example.prolovest;
+package com.example.proloblockchain;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.prolovest.R;
 import com.example.prolovest.helpers.StringHelper;
 
 import org.json.JSONObject;
@@ -70,7 +71,7 @@ public class SignInActivity extends AppCompatActivity {
         progressDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(SignInActivity.this);
-        String url = "http://192.168.1.82:8080/api/v1/user/login"; // IP virtuelle pour emulateur virtuelle
+        String url = "http://192.168.1.175:8080/api/v1/user/login"; // IP virtuelle pour emulateur virtuelle
      //   String url = "http://10.188.222.200:8081/api/v1/user/login"; // IP WIFI pour pour emulateur physique
 
 
@@ -109,7 +110,7 @@ public class SignInActivity extends AppCompatActivity {
         String last_name = response.optString("last_name", "N/A");
         String email = response.optString("email", "N/A");
 
-        Intent goToProfile = new Intent(SignInActivity.this, com.example.prolovest.ProfileActivity.class);
+        Intent goToProfile = new Intent(SignInActivity.this, com.example.proloblockchain.ProfileActivity.class);
         goToProfile.putExtra("first_name", first_name);
         goToProfile.putExtra("last_name", last_name);
         goToProfile.putExtra("email", email);
