@@ -1,20 +1,30 @@
 package com.example.prolovest;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import com.example.prolovest.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    TextView tv_first_name, tv_last_name, tv_email;
-//    Button sign_out_btn;
+    private TextView tvWelcome;
+    private TextView tvBalance;
+    private TextView tvBalanceCents;
+    private TextView tvCurrencySymbol;
+    private RequestQueue requestQueue;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -22,46 +32,96 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // Hook TextView Objects:
-        tv_first_name = findViewById(R.id.first_name);
-        tv_last_name = findViewById(R.id.last_name);
-        tv_email = findViewById(R.id.email);
-     //   sign_out_btn = findViewById(R.id.sign_out_btn); // Assurez-vous que l'ID est correct
+        // Initialisation des vues
+        tvWelcome = findViewById(R.id.textView10);
+        tvBalance = findViewById(R.id.textView12);
+        tvBalanceCents = findViewById(R.id.textView13);
+        tvCurrencySymbol = findViewById(R.id.textViewCurrencySymbol);
 
-        if (tv_first_name == null || tv_last_name == null || tv_email == null ) {
-            Log.e("ProfileActivity", "Erreur : Un des éléments UI est null !");
-            return;
-        }
+        // Configuration du symbole €
+        tvCurrencySymbol.setText("€");
 
-        String first_name = getIntent().getStringExtra("first_name");
-        String last_name = getIntent().getStringExtra("last_name");
+        // Initialisation de Volley
+        requestQueue = Volley.newRequestQueue(this);
+
+        // Récupération de l'email depuis l'Intent
         String email = getIntent().getStringExtra("email");
+        if (email != null) {
+            fetchProloBalance(email);
+        } else {
+            Log.e("ProfileActivity", "Email non reçu dans l'intent");
+        }
+    }
 
-        Log.d("ProfileActivity", "First name: " + first_name);
-        Log.d("ProfileActivity", "Last name: " + last_name);
-        Log.d("ProfileActivity", "Email: " + email);
+    private void fetchProloBalance(String email) {
+        String url = "http://VOTRE_IP_API:8080/api/v1/user/balance/" + email;
 
-        // Vérifier si les valeurs ne sont pas null avant d'affecter
-        if (first_name != null) tv_first_name.setText(first_name);
-        if (last_name != null) tv_last_name.setText(last_name);
-        if (email != null) tv_email.setText(email);
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        BigDecimal balance = new BigDecimal(response.getString("balance"));
+                        formatAndDisplayBalance(balance);
+                    } catch (JSONException e) {
+                        Log.e("BalanceError", "Erreur de parsing JSON", e);
+                        showBalanceError();
+                    } catch (NumberFormatException e) {
+                        Log.e("BalanceError", "Format de balance invalide", e);
+                        showBalanceError();
+                    }
+                },
+                error -> {
+                    Log.e("BalanceError", "Erreur réseau: " + error.getMessage());
+                    showNetworkError();
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer VOTRE_JWT_TOKEN");
+                return headers;
+            }
+        };
 
-        // Set On Click Listener:
-  //      sign_out_btn.setOnClickListener(new View.OnClickListener() {
-    //        @Override
-      //      public void onClick(View view) {
-       //         signUserOut();
-        //    }
-       // });
-   }
+        requestQueue.add(request);
+    }
+
+    private void formatAndDisplayBalance(BigDecimal balance) {
+        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.FRANCE);
+        format.setMaximumFractionDigits(2);
+        format.setMinimumFractionDigits(2);
+
+        String formatted = format.format(balance);
+        // Supprimer le symbole € déjà présent dans le layout
+        String amount = formatted.replace("€", "").trim();
+        String[] parts = amount.split(",");
+
+        runOnUiThread(() -> {
+            tvBalance.setText(parts[0]);
+            if (parts.length > 1) {
+                tvBalanceCents.setText("," + parts[1]);
+            } else {
+                tvBalanceCents.setText(",00");
+            }
+        });
+    }
+
+    private void showBalanceError() {
+        runOnUiThread(() -> {
+            tvBalance.setText("--");
+            tvBalanceCents.setText(",--");
+        });
+    }
+
+    private void showNetworkError() {
+        runOnUiThread(() -> {
+            tvBalance.setText("Hors");
+            tvBalanceCents.setText(",ligne");
+        });
+    }
 
     public void signUserOut() {
-        tv_first_name.setText(null);
-        tv_last_name.setText(null);
-        tv_email.setText(null);
-
-        Intent goToHome = new Intent(ProfileActivity.this, MainActivity.class);
-        startActivity(goToHome);
+        startActivity(new Intent(this, com.example.prolovest.MainActivity.class));
         finish();
     }
 }
