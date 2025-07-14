@@ -2,8 +2,17 @@
 plugins {
     id 'com.android.application' version '8.9.1' apply false
     id 'com.android.library' version '8.9.1' apply false
+    id("org.sonarqube") version "4.4.1.3373"
 
 }
+sonarqube {
+    properties {
+        property("sonar.projectKey", "prolovest")
+        property("sonar.host.url", "http://91.160.67.228:40001")
+        property("sonar.login", System.getenv("sqa_ac30299637a8eddfac10d3d364c6113d35964bb4"))
+    }
+}
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

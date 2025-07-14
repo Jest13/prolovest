@@ -11,23 +11,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
       with:
-        node-version: '18'
+        java-version: '17'
+        distribution: 'temurin'
 
-    - name: Install dependencies
-      run: npm install
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle
 
-    - name: Run SonarQube Scan
+    - name: Run SonarQube analysis
       env:
         SONAR_TOKEN: ${{ secrets.sqa_ac30299637a8eddfac10d3d364c6113d35964bb4 }}
-      run: |
-        npm install -g sonar-scanner
-        sonar-scanner \
-          -Dsonar.projectKey=proloves \
-          -Dsonar.sources=. \
-          -Dsonar.host.url=http://91.160.67.228:40001 \
-          -Dsonar.login=$SONAR_TOKEN
+      run: ./gradlew sonarqube
