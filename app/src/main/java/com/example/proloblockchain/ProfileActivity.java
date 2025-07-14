@@ -1,4 +1,4 @@
-package com.example.prolovest;
+package com.example.proloblockchain;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.prolovest.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.math.BigDecimal;
@@ -36,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvWelcome = findViewById(R.id.textView10);
         tvBalance = findViewById(R.id.textView12);
         tvBalanceCents = findViewById(R.id.textView13);
-        tvCurrencySymbol = findViewById(R.id.textViewCurrencySymbol);
+        // tvCurrencySymbol = findViewById(R.id.textViewCurrencySymbol);
 
         // Configuration du symbole €
         tvCurrencySymbol.setText("€");
