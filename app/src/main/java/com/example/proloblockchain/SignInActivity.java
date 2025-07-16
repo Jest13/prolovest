@@ -139,13 +139,13 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void goToHome(View view) {
-        Intent intent = new Intent(SignInActivity.this, com.example.prolovest.MainActivity.class);
+        Intent intent = new Intent(SignInActivity.this, com.example.proloblockchain.MainActivity.class);
         startActivity(intent);
         finish();
     }
 
     public void goToSigUpAct(View view) {
-        Intent intent = new Intent(SignInActivity.this, com.example.prolovest.SignUpActivity.class);
+        Intent intent = new Intent(SignInActivity.this, com.example.proloblockchain.SignUpActivity.class);
         startActivity(intent);
         finish();
     }

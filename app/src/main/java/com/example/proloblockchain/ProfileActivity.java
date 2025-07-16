@@ -123,7 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void signUserOut() {
-        startActivity(new Intent(this, com.example.prolovest.MainActivity.class));
+        startActivity(new Intent(this, com.example.proloblockchain.MainActivity.class));
         finish();
     }
 }

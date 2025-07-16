@@ -1,4 +1,4 @@
-package com.example.prolovest;
+package com.example.proloblockchain;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.prolovest.R;
-import com.example.prolovest.SignUpActivity;
-
 public class MainActivity extends AppCompatActivity {
 
     Button sign_in, sign_up;
