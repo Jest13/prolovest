@@ -1,7 +1,7 @@
 package com.example.proloblockchain;
 
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -9,15 +9,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.proloblockchain.helpers.StringHelper;
 import com.example.prolovest.R;
-import com.example.prolovest.helpers.StringHelper;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,11 +40,11 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void processFormFields() {
-        if(!validateFirstName() || !validateLastName() || !validateEmail() || !validatePasswordAndConfirm()){
+        if (!validateFirstName() || !validateLastName() || !validateEmail() || !validatePasswordAndConfirm()) {
             return;
         }
 
-        String url = "http://192.168.1.190:8080/api/v1/user/register";
+        String url = "http://91.160.67.228:32769/api/v1/user/register";
 
         JSONObject params = new JSONObject();
         try {
@@ -65,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params,
                 response -> {
                     String message = response.optString("message", "");
-                    if(message.equalsIgnoreCase("Success")){
+                    if (message.equalsIgnoreCase("Success") || response.toString().contains("Success")) {
                         clearFields();
                         Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
                     } else {
@@ -74,22 +72,51 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 },
                 error -> {
-                    String errorMessage = "Registration failed";
-                    if(error.networkResponse != null && error.networkResponse.data != null){
+                    if (error instanceof ParseError && error.networkResponse != null) {
                         try {
-                            String body = new String(error.networkResponse.data);
-                            JSONObject obj = new JSONObject(body);
-                            errorMessage = obj.optString("error", errorMessage);
-                        } catch (Exception e){
+                            String rawBody = new String(error.networkResponse.data, "UTF-8").trim();
+                            Log.d("PROLOVEST_DEBUG", "rawBody = [" + rawBody + "]");
+                            if (rawBody.equalsIgnoreCase("success")) {
+                                clearFields();
+                                Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+
+                    String errorMessage = "Registration failed";
+
+                    if (error.networkResponse != null) {
+                        int statusCode = error.networkResponse.statusCode;
+
+                        if (statusCode == 409) {
+                            errorMessage = "Cette adresse email est déjà utilisée !";
+                        } else if (error.networkResponse.data != null) {
+                            try {
+                                String body = new String(error.networkResponse.data, "UTF-8");
+                                Log.d("PROLOVEST_DEBUG", "errorBody = [" + body + "]");
+                                // Si c'est du JSON, on extrait le champ "error"
+                                JSONObject obj = new JSONObject(body);
+                                errorMessage = obj.optString("error", errorMessage);
+                            } catch (Exception e) {
+                                try {
+                                    errorMessage = new String(error.networkResponse.data, "UTF-8").trim();
+                                } catch (Exception ex) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    } else {
+                        errorMessage = "Impossible de joindre le serveur. Vérifiez votre connexion.";
+                    }
+
                     Toast.makeText(SignUpActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                     error.printStackTrace();
                 }
         );
 
-        // Timeout un peu plus long
         request.setRetryPolicy(new DefaultRetryPolicy(
                 15000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -99,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    private void clearFields(){
+    private void clearFields() {
         first_name.setText("");
         last_name.setText("");
         email.setText("");
@@ -107,10 +134,9 @@ public class SignUpActivity extends AppCompatActivity {
         confirm.setText("");
     }
 
-    // Validation
-    public boolean validateFirstName(){
+    public boolean validateFirstName() {
         String firstName = first_name.getText().toString().trim();
-        if(firstName.isEmpty()){
+        if (firstName.isEmpty()) {
             first_name.setError("First name cannot be empty !");
             return false;
         }
@@ -118,9 +144,9 @@ public class SignUpActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean validateLastName(){
+    public boolean validateLastName() {
         String lastName = last_name.getText().toString().trim();
-        if(lastName.isEmpty()){
+        if (lastName.isEmpty()) {
             last_name.setError("Last name cannot be empty !");
             return false;
         }
@@ -128,12 +154,12 @@ public class SignUpActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean validateEmail(){
+    public boolean validateEmail() {
         String email_e = email.getText().toString().trim();
-        if(email_e.isEmpty()){
+        if (email_e.isEmpty()) {
             email.setError("Email cannot be empty !");
             return false;
-        }else if(!StringHelper.regexEmailValidationPattern(email_e)){
+        } else if (!StringHelper.regexEmailValidationPattern(email_e)) {
             email.setError("Please enter a valid email");
             return false;
         }
@@ -141,15 +167,15 @@ public class SignUpActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean validatePasswordAndConfirm(){
+    public boolean validatePasswordAndConfirm() {
         String password_p = password.getText().toString().trim();
         String confirm_p = confirm.getText().toString().trim();
 
-        if(password_p.isEmpty()){
+        if (password_p.isEmpty()) {
             password.setError("Password cannot be empty !");
             confirm.setError("Confirm password cannot be empty !");
             return false;
-        } else if(!password_p.equals(confirm_p)){
+        } else if (!password_p.equals(confirm_p)) {
             password.setError("Passwords do not match!");
             return false;
         }
@@ -157,5 +183,4 @@ public class SignUpActivity extends AppCompatActivity {
         confirm.setError(null);
         return true;
     }
-
 }

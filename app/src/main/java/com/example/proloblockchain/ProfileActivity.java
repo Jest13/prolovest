@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void fetchProloBalance(String email) {
-        String url = "http://192.168.1.190:8080/api/v1/user/balance/" + email;
+        String url = "http://91.160.67.228:32769/api/v1/user/balance/" + email;
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,

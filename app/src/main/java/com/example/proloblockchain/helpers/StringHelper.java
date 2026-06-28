@@ -1,5 +1,4 @@
-package com.example.prolovest.helpers;
-
+package com.example.proloblockchain.helpers;
 public class StringHelper {
 
     public static boolean regexEmailValidationPattern(String email) {
