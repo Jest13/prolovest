@@ -23,6 +23,22 @@
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
+            android:name="com.example.proloblockchain.transactions.AddActivity"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name="com.example.proloblockchain.transactions.BuyActivity"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name="com.example.proloblockchain.transactions.SendActivity"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name="com.example.proloblockchain.transactions.ReceiveActivity"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
             android:name="com.example.proloblockchain.SignUpActivity"
             android:exported="false"
             tools:ignore="Instantiatable" />

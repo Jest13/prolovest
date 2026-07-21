@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         // tvCurrencySymbol = findViewById(R.id.textViewCurrencySymbol);
 
         // Configuration du symbole €
-        tvCurrencySymbol.setText("€");
+        //    tvCurrencySymbol.setText("€");
 
         // Initialisation de Volley
         requestQueue = Volley.newRequestQueue(this);
