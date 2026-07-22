@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/top_background_main_activity"
+    tools:context=".transactions.AddActivity">
+
+    <!-- En-tête -->
+    <TextView
+        android:id="@+id/tv_add_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Add Funds"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- La carte principale -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_background"
+        android:padding="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_title">
+
+        <!-- Icône Add de ta charte -->
+        <ImageView
+            android:id="@+id/iv_add_logo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_deposit_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Deposit USD"
+            android:textColor="@color/gold"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_add_logo" />
+
+        <!-- Sélection de la méthode de paiement (Visuel uniquement pour le moment) -->
+        <TextView
+            android:id="@+id/tv_payment_method"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="#1AFFFFFF"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:text="Credit Card (**** 1234)"
+            android:textColor="@color/gold"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_deposit_subtitle" />
+
+        <!-- Champ pour le montant à ajouter -->
+        <EditText
+            android:id="@+id/et_add_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="0.00"
+            android:inputType="numberDecimal"
+            android:textColor="@color/gold"
+            android:textColorHint="#9695CE"
+            android:textSize="53sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_payment_method" />
+
+        <TextView
+            android:id="@+id/tv_add_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USD"
+            android:textColor="@color/gold"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_add_amount" />
+
+        <!-- Bouton de confirmation -->
+        <Button
+            android:id="@+id/btn_confirm_add"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#C3891C"
+            android:text="Deposit Funds"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_add_currency" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
