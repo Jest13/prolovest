@@ -44,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        String url = "http://91.160.67.228:32769/api/v1/user/register";
+        String url = "http://82.230.48.228:32769/api/v1/user/register";
 
         JSONObject params = new JSONObject();
         try {

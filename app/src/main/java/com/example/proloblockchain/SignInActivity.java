@@ -71,7 +71,7 @@ public class SignInActivity extends AppCompatActivity {
         progressDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(SignInActivity.this);
-        String url = "http://91.160.67.228:32769/api/v1/user/login"; // IP virtuelle pour emulateur virtuelle
+        String url = "http://82.230.48.228:32769/api/v1/user/login"; // IP virtuelle pour emulateur virtuelle
      //   String url = "http://10.188.222.200:8081/api/v1/user/login"; // IP WIFI pour pour emulateur physique
 
 

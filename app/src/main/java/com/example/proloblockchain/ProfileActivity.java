@@ -23,9 +23,8 @@ import java.util.Map;
 public class ProfileActivity extends AppCompatActivity {
 
     private TextView tvWelcome;
-    private TextView tvBalance;
-    private TextView tvBalanceCents;
-    private TextView tvCurrencySymbol;
+    private TextView tvProBalance;
+    private TextView tvProDecimals;
     private RequestQueue requestQueue;
 
     @SuppressLint("MissingInflatedId")
@@ -34,14 +33,10 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // Initialisation des vues
+        // Initialisation des vues avec les NOUVEAUX IDs du design propre
         tvWelcome = findViewById(R.id.textView10);
-        tvBalance = findViewById(R.id.textView12);
-        tvBalanceCents = findViewById(R.id.textView13);
-        // tvCurrencySymbol = findViewById(R.id.textViewCurrencySymbol);
-
-        // Configuration du symbole €
-        //    tvCurrencySymbol.setText("€");
+        tvProBalance = findViewById(R.id.tv_pro_balance);
+        tvProDecimals = findViewById(R.id.tv_pro_decimals);
 
         // Initialisation de Volley
         requestQueue = Volley.newRequestQueue(this);
@@ -56,7 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void fetchProloBalance(String email) {
-        String url = "http://91.160.67.228:32769/api/v1/user/balance/" + email;
+        String url = "http://82.230.48.228:32769/api/v1/user/balance/" + email;
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,
@@ -80,6 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
+                // N'oublie pas qu'il faudra remplacer ça par le vrai Token un jour !
                 headers.put("Authorization", "Bearer VOTRE_JWT_TOKEN");
                 return headers;
             }
@@ -89,36 +85,36 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void formatAndDisplayBalance(BigDecimal balance) {
-        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.FRANCE);
+        NumberFormat format = NumberFormat.getNumberInstance(Locale.FRANCE);
         format.setMaximumFractionDigits(2);
         format.setMinimumFractionDigits(2);
 
         String formatted = format.format(balance);
-        // Supprimer le symbole € déjà présent dans le layout
-        String amount = formatted.replace("€", "").trim();
-        String[] parts = amount.split(",");
+        String[] parts = formatted.split(",");
 
         runOnUiThread(() -> {
-            tvBalance.setText(parts[0]);
+            // Affiche la partie entière (ex: 1 250)
+            tvProBalance.setText(parts[0]);
+            // Affiche la partie décimale avec le point (ex: .50)
             if (parts.length > 1) {
-                tvBalanceCents.setText("," + parts[1]);
+                tvProDecimals.setText("." + parts[1]);
             } else {
-                tvBalanceCents.setText(",00");
+                tvProDecimals.setText(".00");
             }
         });
     }
 
     private void showBalanceError() {
         runOnUiThread(() -> {
-            tvBalance.setText("--");
-            tvBalanceCents.setText(",--");
+            tvProBalance.setText("--");
+            tvProDecimals.setText(".--");
         });
     }
 
     private void showNetworkError() {
         runOnUiThread(() -> {
-            tvBalance.setText("Hors");
-            tvBalanceCents.setText(",ligne");
+            tvProBalance.setText("Hors");
+            tvProDecimals.setText(" ligne");
         });
     }
 
