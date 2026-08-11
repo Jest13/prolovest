@@ -1,7 +1,9 @@
 package com.example.proloblockchain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -182,5 +184,16 @@ public class SignUpActivity extends AppCompatActivity {
         password.setError(null);
         confirm.setError(null);
         return true;
+    }
+    public void goToHome(View view) {
+        // RETIRE le finish() ici pour ne pas tuer l'activité principale en arrière-plan
+        Intent intent = new Intent(SignUpActivity.this, com.example.proloblockchain.MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToSigUpAct(View view) {
+        // Ici tu peux laisser ou enlever finish() selon si tu veux empiler ou remplacer la page
+        Intent intent = new Intent(SignUpActivity.this, com.example.proloblockchain.SignUpActivity.class);
+        startActivity(intent);
     }
 }

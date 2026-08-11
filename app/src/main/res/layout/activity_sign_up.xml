@@ -5,140 +5,206 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".MainActivity">
+    android:background="@drawable/top_background_main_activity"
+    tools:context=".SignUpActivity">
 
+    <!-- Indicateur de sécurité Monero / Confidentialité tout en haut -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="🛡️ RingCT Privacy Shield"
+        android:textColor="#4CAF50"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Logo Prolovest -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="241dp"
-        android:layout_height="176dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="120dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/prolovest_white" />
 
+    <!-- Titre de la page -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up Activity"
+        android:layout_marginTop="8dp"
+        android:text="Create Account"
         android:textColor="@color/gold"
-        android:textSize="30sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp" />
-
-    <LinearLayout
-        android:id="@+id/formContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/textView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center_horizontal"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
-
-        <EditText
-            android:id="@+id/first_name"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:padding="3dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="First name"
-            android:textColorHint="@color/gold"
-            android:textColor="@color/gold" />
-
-        <EditText
-            android:id="@+id/last_name"
-            android:layout_width="300dp"
-            android:padding="3dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="Last name"
-            android:textColorHint="@color/gold"
-            android:textColor="@color/gold" />
-
-        <EditText
-            android:id="@+id/email"
-            android:padding="3dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="Email"
-            android:textColorHint="@color/gold"
-            android:textColor="@color/gold" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="Password"
-            android:textColorHint="@color/gold"
-            android:inputType="textPassword"
-            android:textColor="@color/gold" />
-
-        <EditText
-            android:id="@+id/confirmPassword"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_border"
-            android:inputType="textPassword"
-            android:hint="Confirm Password"
-            android:textColorHint="@color/gold"
-            android:textColor="@color/gold" />
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/goToSignIn"
+        android:id="@+id/textViewSub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:onClick="goToSigInAct"
-        android:text="@string/go_to_sign_in"
-        android:textColor="@color/gold"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/formContainer"
-        app:layout_constraintStart_toStartOf="@id/formContainer"
-        app:layout_constraintEnd_toEndOf="@id/formContainer" />
+        android:layout_marginTop="2dp"
+        android:text="Join the Proloblockchain ecosystem"
+        android:textColor="#CCCCCC"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- CARTE DU FORMULAIRE D'INSCRIPTION (Style Super-App unifié) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/formContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="@color/white"
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewSub"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- First name -->
+        <EditText
+            android:id="@+id/first_name"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="#F5F6FA"
+            android:hint="First name"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#333333"
+            android:textColorHint="#888888"
+            android:textSize="13sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Last name -->
+        <EditText
+            android:id="@+id/last_name"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="#F5F6FA"
+            android:hint="Last name"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#333333"
+            android:textColorHint="#888888"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/first_name" />
+
+        <!-- Email -->
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="#F5F6FA"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#333333"
+            android:textColorHint="#888888"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/last_name" />
+
+        <!-- Password -->
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="#F5F6FA"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#333333"
+            android:textColorHint="#888888"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/email" />
+
+        <!-- Confirm Password -->
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="#F5F6FA"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#333333"
+            android:textColorHint="#888888"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/password" />
+
+        <!-- Bouton Register Principal -->
+        <Button
+            android:id="@+id/sign_up_btn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/btn_rounded_corners"
+            android:backgroundTint="#C3891C"
+            android:onClick="goToSignUp"
+            android:text="Register"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/confirmPassword" />
+
+        <!-- Lien vers la connexion -->
+        <TextView
+            android:id="@+id/goToSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:onClick="goToSigInAct"
+            android:text="Already have an account? Sign In"
+            android:textColor="#C3891C"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sign_up_btn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- BOUTON RETOUR (Discret en bas) -->
     <Button
         android:id="@+id/bth"
-        android:layout_width="203dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="560dp"
-        android:background="@drawable/btn_rounded_corners"
-        android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#00000000"
+        android:drawableStart="@drawable/ic_baseline_arrow_back_ios_24"
+        android:drawablePadding="6dp"
         android:onClick="goToHome"
-        android:text="BACK TO HOME"
+        android:text="Back to Home"
+        android:textColor="@color/gold"
+        android:textSize="12sp"
+        app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/sign_up_btn"
-        android:layout_width="203dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="512dp"
-        android:background="@drawable/btn_rounded_corners"
-        android:onClick="goToSignUp"
-        android:text="Register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/formContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

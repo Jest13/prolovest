@@ -7,7 +7,6 @@
     android:background="@drawable/top_background_main_activity"
     tools:context=".ProfileActivity">
 
-    <!-- Utilisation de NestedScrollView pour une fluidité parfaite -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -404,7 +403,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="4dp"
-                android:text="🛡️ Active Prolo Protocols (Insurance & Vaults)"
+                android:text="🛡️ Active Prolo Protocols (Insurance &amp; Vaults)"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -438,18 +437,70 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- SECTION HISTORIQUE DES TRANSACTIONS -->
+            <!-- SECTION SOUS-TOKENS & PROTOCOLES PROLO (En remplacement des "Item 0") -->
             <TextView
-                android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
-                android:text="📜 Crypto Activities & Ledger"
+                android:text="📜 Crypto Activities &amp; Sub-Tokens Ledger"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="@color/white"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <!-- 1. SOUS-TOKEN : SMIC-LOCK -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔒 SMIC-LOCK (Monthly Salary Vault)" android:textColor="#333333" android:textSize="13sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Linear release over 30 days" android:textColor="#777777" android:textSize="11sp"/>
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="450.00 PRO\n($558.00)" android:textAlignment="textEnd" android:textColor="#C3891C" android:textSize="12sp" android:textStyle="bold"/>
+                </LinearLayout>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginTop="10dp" android:layout_marginBottom="10dp"/>
+
+                <!-- 2. SOUS-TOKEN : LOYER-TOKEN -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠 LOYER-ESCROW (Rent Shield)" android:textColor="#333333" android:textSize="13sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Smart contract locked for landlord" android:textColor="#777777" android:textSize="11sp"/>
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="600.00 PRO\n($744.00)" android:textAlignment="textEnd" android:textColor="#C3891C" android:textSize="12sp" android:textStyle="bold"/>
+                </LinearLayout>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginTop="10dp" android:layout_marginBottom="10dp"/>
+
+                <!-- 3. SOUS-TOKEN : BAKE-PROLO -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🥖 BAKE-COIN (Inflation Hedge Coupon)" android:textColor="#333333" android:textSize="13sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Local bakery index fund" android:textColor="#777777" android:textSize="11sp"/>
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="125.50 PRO\n($155.62)" android:textAlignment="textEnd" android:textColor="#4CAF50" android:textSize="12sp" android:textStyle="bold"/>
+                </LinearLayout>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginTop="10dp" android:layout_marginBottom="10dp"/>
+
+                <!-- 4. SOUS-TOKEN : DUSTER-PARTS -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🚙 DUSTER-PARTS (Mechanic Bond)" android:textColor="#333333" android:textSize="13sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spare parts tokenized fund (200k km)" android:textColor="#777777" android:textSize="11sp"/>
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="75.00 PRO\n($93.00)" android:textAlignment="textEnd" android:textColor="#C3891C" android:textSize="12sp" android:textStyle="bold"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- RecyclerView optionnel pour l'historique brut si besoin -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
@@ -462,117 +513,133 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- BARRE DE NAVIGATION FLOTTANTE STYLE PILULE (PROPRE ET ARRONDIE) -->
-    <LinearLayout
-        android:id="@+id/floating_nav_bar"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_background"
-        android:backgroundTint="#C3891C"
-        android:elevation="16dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+    <!-- CONTENEUR GLOBAL POUR LA BARRE ET LE BOUTON FLOTTANT -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Home -->
+        <!-- 1. BARRE DE NAVIGATION FLOTTANTE -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:id="@+id/floating_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="#C3891C"
+            android:elevation="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/bottom_btn1" />
+            <!-- Home -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Home"
-                android:textColor="#4E4B9B"
-                android:textSize="10sp"
-                android:textStyle="bold" />
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/bottom_btn1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Home"
+                    android:textColor="#4E4B9B"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Profile -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/bottom_btn2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Profile"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Espace vide central -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2" />
+
+            <!-- Wallet -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/bottom_btn3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Wallet"
+                    android:textColor="#9695CE"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Settings -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/bottom_btn4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Settings"
+                    android:textColor="#9695CE"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
         </LinearLayout>
 
-        <!-- Profile -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/bottom_btn2" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Profile"
-                android:textColor="#FFFFFF"
-                android:textSize="10sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Wallet -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/bottom_btn3" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Wallet"
-                android:textColor="#9695CE"
-                android:textSize="10sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Settings -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/bottom_btn4" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Settings"
-                android:textColor="#9695CE"
-                android:textSize="10sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

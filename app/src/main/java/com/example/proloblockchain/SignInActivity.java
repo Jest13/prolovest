@@ -139,15 +139,15 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void goToHome(View view) {
+        // RETIRE le finish() ici pour ne pas tuer l'activité principale en arrière-plan
         Intent intent = new Intent(SignInActivity.this, com.example.proloblockchain.MainActivity.class);
         startActivity(intent);
-        finish();
     }
 
     public void goToSigUpAct(View view) {
+        // Ici tu peux laisser ou enlever finish() selon si tu veux empiler ou remplacer la page
         Intent intent = new Intent(SignInActivity.this, com.example.proloblockchain.SignUpActivity.class);
         startActivity(intent);
-        finish();
     }
 
     private boolean validateEmail() {
