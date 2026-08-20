@@ -27,7 +27,7 @@
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
-            android:name="com.example.proloblockchain.transactions.BuyActivity"
+            android:name="com.example.proloblockchain.transactions.FastBuyActivity"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity

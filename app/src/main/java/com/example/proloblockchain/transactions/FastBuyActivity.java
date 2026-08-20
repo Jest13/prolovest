@@ -1,4 +1,4 @@
 package com.example.proloblockchain.transactions;
 
-public class BuyActivity {
+public class FastBuyActivity {
 }

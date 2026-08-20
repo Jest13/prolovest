@@ -299,6 +299,7 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/btn_buy"
+                            android:onClick="goToFastBuy"
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:background="@drawable/btn_rounded_corners">

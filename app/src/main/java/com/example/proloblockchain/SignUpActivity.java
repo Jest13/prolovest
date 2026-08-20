@@ -60,7 +60,6 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-
         RequestQueue queue = Volley.newRequestQueue(SignUpActivity.this);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params,
