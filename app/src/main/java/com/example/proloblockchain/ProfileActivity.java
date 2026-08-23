@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -15,7 +17,7 @@ import com.example.proloblockchain.transactions.FastBuyActivity;
 import com.example.prolovest.R;
 
 import org.json.JSONException;
-import org.json.JSONObject;
+
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.HashMap;
