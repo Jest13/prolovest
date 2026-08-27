@@ -97,9 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
         String[] parts = formatted.split(",");
 
         runOnUiThread(() -> {
-            // Affiche la partie entière (ex: 1 250)
             tvProBalance.setText(parts[0]);
-            // Affiche la partie décimale avec le point (ex: .50)
             if (parts.length > 1) {
                 tvProDecimals.setText("." + parts[1]);
             } else {
