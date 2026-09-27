@@ -11,6 +11,7 @@ android {
         targetSdk 35
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         sonarqube {
             androidVariant 'debug'
@@ -42,4 +43,5 @@ dependencies {
     implementation 'com.android.volley:volley-cronet:1.2.1'
     implementation 'com.github.majorkik:SparkLineLayout:1.0.1'
     implementation "androidx.activity:activity:1.6.0-alpha05"
+    implementation 'org.bouncycastle:bcprov-jdk18on:1.80'
 }

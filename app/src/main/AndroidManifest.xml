@@ -19,6 +19,9 @@
             android:name="com.example.proloblockchain.ProfileActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.proloblockchain.MiningActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.proloblockchain.SignInActivity"
             android:exported="false"
             tools:ignore="Instantiatable" />

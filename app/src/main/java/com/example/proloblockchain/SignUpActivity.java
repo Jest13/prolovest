@@ -21,6 +21,9 @@ import com.example.prolovest.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SignUpActivity extends AppCompatActivity {
 
     EditText first_name, last_name, email, password, confirm;
@@ -62,14 +65,21 @@ public class SignUpActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(SignUpActivity.this);
 
+        String userEmailText = email.getText().toString().trim();
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params,
                 response -> {
                     String message = response.optString("message", "");
                     if (message.equalsIgnoreCase("Success") || response.toString().contains("Success")) {
                         clearFields();
-                        Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpActivity.this, "Compte créé avec succès !", Toast.LENGTH_LONG).show();
+
+                        Intent goToSignIn = new Intent(SignUpActivity.this, SignInActivity.class);
+                        goToSignIn.putExtra("email", userEmailText);
+                        startActivity(goToSignIn);
+                        finish();
                     } else {
-                        String error = response.optString("error", "Registration failed");
+                        String error = response.optString("error", "Échec de l'inscription");
                         Toast.makeText(SignUpActivity.this, error, Toast.LENGTH_LONG).show();
                     }
                 },
@@ -80,7 +90,12 @@ public class SignUpActivity extends AppCompatActivity {
                             Log.d("PROLOVEST_DEBUG", "rawBody = [" + rawBody + "]");
                             if (rawBody.equalsIgnoreCase("success")) {
                                 clearFields();
-                                Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignUpActivity.this, "Compte créé avec succès !", Toast.LENGTH_LONG).show();
+
+                                Intent goToSignIn = new Intent(SignUpActivity.this, SignInActivity.class);
+                                goToSignIn.putExtra("email", userEmailText);
+                                startActivity(goToSignIn);
+                                finish();
                                 return;
                             }
                         } catch (Exception e) {
@@ -88,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     }
 
-                    String errorMessage = "Registration failed";
+                    String errorMessage = "Échec de l'inscription";
 
                     if (error.networkResponse != null) {
                         int statusCode = error.networkResponse.statusCode;
@@ -99,7 +114,6 @@ public class SignUpActivity extends AppCompatActivity {
                             try {
                                 String body = new String(error.networkResponse.data, "UTF-8");
                                 Log.d("PROLOVEST_DEBUG", "errorBody = [" + body + "]");
-                                // Si c'est du JSON, on extrait le champ "error"
                                 JSONObject obj = new JSONObject(body);
                                 errorMessage = obj.optString("error", errorMessage);
                             } catch (Exception e) {
@@ -117,12 +131,20 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                     error.printStackTrace();
                 }
-        );
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                headers.put("Connection", "close");
+                return headers;
+            }
+        };
 
         request.setRetryPolicy(new DefaultRetryPolicy(
                 15000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                2,
+                1.0f
         ));
 
         queue.add(request);

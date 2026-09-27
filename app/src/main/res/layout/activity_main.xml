@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F6FA"
-    android:animateLayoutChanges="true"
-    tools:context=".MainActivity">
+    tools:context="com.example.proloblockchain.MainActivity">
 
     <!-- HEADER : Barre de recherche et actions rapides -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,8 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="24dp"
-            android:animateLayoutChanges="true">
+            android:paddingBottom="24dp">
 
             <!-- BANNIERE PRINCIPALE -->
             <androidx.constraintlayout.widget.ConstraintLayout

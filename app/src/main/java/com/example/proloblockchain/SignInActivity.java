@@ -24,6 +24,7 @@ import com.example.proloblockchain.helpers.StringHelper;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -46,6 +47,12 @@ public class SignInActivity extends AppCompatActivity {
             Toast.makeText(this, "Error initializing views", Toast.LENGTH_LONG).show();
             Log.e("SignInActivity", "Initialization error: et_email, et_password or sign_in_btn is null");
             return;
+        }
+
+        // Pre-fill email if passed from SignUpActivity
+        String prefilledEmail = getIntent().getStringExtra("email");
+        if (prefilledEmail != null && !prefilledEmail.trim().isEmpty()) {
+            et_email.setText(prefilledEmail);
         }
 
         // Ajout de l'indicateur de chargement
@@ -71,9 +78,7 @@ public class SignInActivity extends AppCompatActivity {
         progressDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(SignInActivity.this);
-        String url = "http://82.230.48.228:32769/api/v1/user/login"; // IP virtuelle pour emulateur virtuelle
-     //   String url = "http://10.188.222.200:8081/api/v1/user/login"; // IP WIFI pour pour emulateur physique
-
+        String url = "http://82.230.48.228:32769/api/v1/user/login";
 
         HashMap<String, String> params = new HashMap<>();
         params.put("email", et_email.getText().toString().trim());
@@ -93,13 +98,20 @@ public class SignInActivity extends AppCompatActivity {
                         progressDialog.dismiss(); // Masquer l'indicateur de chargement
                         handleLoginError(error);
                     }
-                });
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                headers.put("Connection", "close");
+                return headers;
+            }
+        };
 
-        // Configuration de la politique de réessai
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                10000, // Timeout en millisecondes
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, // Nombre de tentatives
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT // Facteur de backoff
+                12000,
+                2,
+                1.0f
         ));
 
         queue.add(jsonObjectRequest);
