@@ -12,9 +12,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -23,6 +25,7 @@ import com.example.proloblockchain.helpers.StringHelper;
 
 import org.json.JSONObject;
 
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -109,7 +112,7 @@ public class SignInActivity extends AppCompatActivity {
         };
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                12000,
+                25000,
                 2,
                 1.0f
         ));
@@ -133,20 +136,24 @@ public class SignInActivity extends AppCompatActivity {
 
     private void handleLoginError(VolleyError error) {
         error.printStackTrace();
-        String errorMessage = "Login failed. Please try again.";
+        String errorMessage = "Connexion échouée. Veuillez réessayer.";
 
-        if (error.networkResponse != null) {
+        if (error instanceof TimeoutError) {
+            errorMessage = "⏳ Le serveur (82.230.48.228) n'a pas répondu à temps (Timeout). Si vous êtes en 4G/5G, vérifiez si votre routeur autorise le port 32769 ou connectez-vous en Wi-Fi.";
+        } else if (error instanceof NoConnectionError) {
+            errorMessage = "📡 Impossible de joindre le serveur 82.230.48.228. Vérifiez votre connexion réseau.";
+        } else if (error.networkResponse != null) {
             int statusCode = error.networkResponse.statusCode;
             if (statusCode == 401) {
-                errorMessage = "Invalid credentials. Please check your email and password.";
+                errorMessage = "Identifiants incorrects. Veuillez vérifier votre email et mot de passe.";
             } else if (statusCode >= 500) {
-                errorMessage = "Server error. Please try again later.";
+                errorMessage = "Erreur interne du serveur (500). Veuillez réessayer plus tard.";
             }
-        } else if (error.getCause() instanceof java.net.UnknownHostException) {
-            errorMessage = "No internet connection. Please check your network.";
+        } else if (error.getCause() instanceof UnknownHostException) {
+            errorMessage = "Serveur introuvable. Vérifiez l'adresse IP et la connexion Internet.";
         }
 
-        Log.e("SignInActivity", "Volley Error: " + error.getMessage());
+        Log.e("SignInActivity", "Volley Error: " + error);
         Toast.makeText(SignInActivity.this, errorMessage, Toast.LENGTH_LONG).show();
     }
 

@@ -14,6 +14,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.TimeoutError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.proloblockchain.helpers.StringHelper;
@@ -105,7 +106,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                     String errorMessage = "Échec de l'inscription";
 
-                    if (error.networkResponse != null) {
+                    if (error instanceof TimeoutError) {
+                        errorMessage = "⏳ Le serveur (82.230.48.228) n'a pas répondu à temps (Timeout). Si vous êtes en 4G/5G, vérifiez si votre routeur autorise le port 32769 ou connectez-vous en Wi-Fi.";
+                    } else if (error.networkResponse != null) {
                         int statusCode = error.networkResponse.statusCode;
 
                         if (statusCode == 409) {
@@ -125,7 +128,7 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                         }
                     } else {
-                        errorMessage = "Impossible de joindre le serveur. Vérifiez votre connexion.";
+                        errorMessage = "Impossible de joindre le serveur 82.230.48.228. Vérifiez votre connexion réseau.";
                     }
 
                     Toast.makeText(SignUpActivity.this, errorMessage, Toast.LENGTH_LONG).show();
@@ -142,7 +145,7 @@ public class SignUpActivity extends AppCompatActivity {
         };
 
         request.setRetryPolicy(new DefaultRetryPolicy(
-                15000,
+                25000,
                 2,
                 1.0f
         ));

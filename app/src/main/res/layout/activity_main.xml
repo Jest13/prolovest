@@ -228,48 +228,48 @@
                 <!-- PROLO -->
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="PRO" android:textStyle="bold" android:textSize="16sp" android:textColor="#333333"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$1.24" android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
-                    <TextView android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="+142%" android:textColor="#4CAF50" android:textStyle="bold" />
+                    <TextView android:id="@+id/tv_pro_price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$1.24" android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
+                    <TextView android:id="@+id/tv_pro_change" android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="+14.2%" android:textColor="#4CAF50" android:textStyle="bold" />
                 </LinearLayout>
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginTop="12dp" android:layout_marginBottom="12dp"/>
 
                 <!-- BTC -->
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="BTC" android:textStyle="bold" android:textSize="16sp" android:textColor="#333333"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$64,320" android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
-                    <TextView android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="+2.4%" android:textColor="#4CAF50" android:textStyle="bold" />
+                    <TextView android:id="@+id/tv_btc_price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chargement..." android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
+                    <TextView android:id="@+id/tv_btc_change" android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="--%" android:textColor="#4CAF50" android:textStyle="bold" />
                 </LinearLayout>
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginTop="12dp" android:layout_marginBottom="12dp"/>
 
                 <!-- ETH -->
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ETH" android:textStyle="bold" android:textSize="16sp" android:textColor="#333333"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$3,450" android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
-                    <TextView android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="+5.1%" android:textColor="#4CAF50" android:textStyle="bold" />
+                    <TextView android:id="@+id/tv_eth_price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chargement..." android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
+                    <TextView android:id="@+id/tv_eth_change" android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="--%" android:textColor="#4CAF50" android:textStyle="bold" />
                 </LinearLayout>
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginTop="12dp" android:layout_marginBottom="12dp"/>
 
                 <!-- SOL -->
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="SOL" android:textStyle="bold" android:textSize="16sp" android:textColor="#333333"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$145.20" android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
-                    <TextView android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="+12.3%" android:textColor="#4CAF50" android:textStyle="bold" />
+                    <TextView android:id="@+id/tv_sol_price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chargement..." android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
+                    <TextView android:id="@+id/tv_sol_change" android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="--%" android:textColor="#4CAF50" android:textStyle="bold" />
                 </LinearLayout>
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginTop="12dp" android:layout_marginBottom="12dp"/>
 
                 <!-- DOGE -->
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="DOGE" android:textStyle="bold" android:textSize="16sp" android:textColor="#333333"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$0.12" android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
-                    <TextView android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="+1.5%" android:textColor="#4CAF50" android:textStyle="bold" />
+                    <TextView android:id="@+id/tv_doge_price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chargement..." android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
+                    <TextView android:id="@+id/tv_doge_change" android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="--%" android:textColor="#4CAF50" android:textStyle="bold" />
                 </LinearLayout>
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginTop="12dp" android:layout_marginBottom="12dp"/>
 
-                <!-- CHIA (En négatif rouge) -->
+                <!-- CHIA -->
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="XCH" android:textStyle="bold" android:textSize="16sp" android:textColor="#333333"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$30.50" android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
-                    <TextView android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#FFEBEE" android:gravity="center" android:text="-0.8%" android:textColor="#F44336" android:textStyle="bold" />
+                    <TextView android:id="@+id/tv_xch_price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chargement..." android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
+                    <TextView android:id="@+id/tv_xch_change" android:layout_width="70dp" android:layout_height="28dp" android:layout_marginStart="12dp" android:background="@drawable/btn_rounded_corners" android:backgroundTint="#E8F5E9" android:gravity="center" android:text="--%" android:textColor="#4CAF50" android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
