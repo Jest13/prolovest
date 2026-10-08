@@ -243,6 +243,21 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToSettings(View view) {
+        Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
+        intent.putExtra("email", currentUserEmail);
+        
+        // Extraction du prénom et du nom actuels de la vue tvWelcome
+        String welcomeText = tvWelcome.getText().toString();
+        if (welcomeText.startsWith("Hello ")) {
+            String[] nameParts = welcomeText.substring(6).split(" ", 2);
+            if (nameParts.length > 0) intent.putExtra("first_name", nameParts[0]);
+            if (nameParts.length > 1) intent.putExtra("last_name", nameParts[1]);
+        }
+        
+        startActivity(intent);
+    }
+
     public void signUserOut() {
         startActivity(new Intent(this, MainActivity.class));
         finish();

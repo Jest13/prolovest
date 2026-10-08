@@ -42,6 +42,9 @@
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
+            android:name="com.example.proloblockchain.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.proloblockchain.SignUpActivity"
             android:exported="false"
             tools:ignore="Instantiatable" />
